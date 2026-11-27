@@ -1,5 +1,4 @@
-
-import Link from "next/link";
+﻿import Link from "next/link";
 
 const features = [
   {
@@ -25,10 +24,8 @@ const features = [
 export default function Home() {
   return (
     <main className="overflow-hidden bg-white text-[#14243A]">
-
       {/* HERO */}
       <section className="relative mx-auto mt-2 min-h-[720px] max-w-[1500px] overflow-hidden rounded-[28px] bg-gradient-to-br from-[#087CC1] via-[#078DCE] to-[#17B6ED] px-6 text-white">
-
         {/* Atmosfera e nuvens */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-40 left-[-10%] h-[420px] w-[700px] rounded-full bg-white/35 blur-[90px]" />
@@ -39,7 +36,6 @@ export default function Home() {
 
         {/* NAVBAR */}
         <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between py-7">
-
           <Link href="/" className="text-2xl font-bold tracking-tight">
             AULORA<span className="text-[#C8FF55]">.</span>
           </Link>
@@ -55,13 +51,12 @@ export default function Home() {
             href="/register"
             className="rounded-full bg-[#C8FF55] px-6 py-3 text-[11px] font-bold uppercase tracking-wider text-[#14243A] transition hover:scale-105"
           >
-            Get started ↗
+            Get started →
           </Link>
         </header>
 
         {/* HERO CONTENT */}
         <div id="home" className="relative z-10 mx-auto max-w-4xl pt-14 text-center md:pt-16">
-
           <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] backdrop-blur-md">
             <span className="h-2 w-2 rounded-full bg-[#C8FF55]" />
             Your academic life, reimagined
@@ -91,21 +86,20 @@ export default function Home() {
               href="/register"
               className="rounded-full bg-[#C8FF55] px-7 py-4 text-[11px] font-bold uppercase tracking-wider text-[#14243A] transition hover:scale-105"
             >
-              Get started ↗
+              Get started →
             </Link>
           </div>
         </div>
 
         {/* FLOATING DASHBOARD CARDS */}
         <div className="relative z-10 mx-auto mt-16 flex max-w-5xl items-center justify-center gap-3 pb-20">
-
           <div className="hidden w-44 -rotate-6 rounded-2xl border border-white/50 bg-white/90 p-4 text-[#14243A] shadow-2xl backdrop-blur-md sm:block">
             <p className="text-[10px] text-slate-500">Academic average</p>
             <p className="mt-2 text-3xl font-bold">16.5</p>
             <div className="mt-3 h-2 rounded-full bg-slate-100">
               <div className="h-2 w-[82%] rounded-full bg-[#28B8A5]" />
             </div>
-            <p className="mt-2 text-[9px] text-emerald-600">Great progress ↗</p>
+            <p className="mt-2 text-[9px] text-emerald-600">Great progress ↑</p>
           </div>
 
           <div className="w-52 rotate-[-3deg] rounded-2xl border border-white/50 bg-white p-5 text-[#14243A] shadow-2xl sm:w-60">
@@ -141,7 +135,6 @@ export default function Home() {
             <p className="mt-2 text-[9px]">You&apos;re making progress!</p>
           </div>
         </div>
-
       </section>
 
       {/* PARTNERS STRIP */}
@@ -150,7 +143,7 @@ export default function Home() {
           <span>✦ LEARNING</span>
           <span>◈ PRODUCTIVITY</span>
           <span>✳ TECHNOLOGY</span>
-          <span>◎ INNOVATION</span>
+          <span>◉ INNOVATION</span>
           <span>✦ INTELLIGENCE</span>
           <span>◈ EDUCATION</span>
         </div>
@@ -158,7 +151,6 @@ export default function Home() {
 
       {/* ABOUT */}
       <section id="about" className="mx-auto max-w-7xl px-6 py-24">
-
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#087CC1]">
             • About us
@@ -180,7 +172,6 @@ export default function Home() {
 
         {/* FEATURE CARDS */}
         <div id="features" className="mt-16 grid gap-5 md:grid-cols-3">
-
           <div className="relative flex min-h-[330px] flex-col justify-between overflow-hidden rounded-[26px] bg-[#087CC1] p-7 text-white">
             <div className="flex items-center justify-between">
               <span className="text-sm font-bold">AULORA.</span>
@@ -224,7 +215,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -292,7 +282,7 @@ export default function Home() {
               href="/register"
               className="mt-9 inline-flex rounded-full bg-[#C8FF55] px-8 py-4 text-xs font-bold uppercase tracking-wider text-[#14243A] transition hover:scale-105"
             >
-              Discover AULORA AI ↗
+              Discover AULORA AI →
             </Link>
           </div>
         </div>
@@ -311,7 +301,7 @@ export default function Home() {
             href="/register"
             className="mt-8 inline-flex rounded-full bg-[#C8FF55] px-8 py-4 text-xs font-bold uppercase tracking-wider text-[#14243A]"
           >
-            Start your journey ↗
+            Start your journey →
           </Link>
         </div>
       </section>
@@ -323,7 +313,7 @@ export default function Home() {
             AULORA<span className="text-[#087CC1]">.</span>
           </Link>
           <p className="text-xs text-slate-400">
-            © {new Date().getFullYear()} AULORA. Own your time. Shape your future.
+            © 2026 AULORA. Own your time. Shape your future.
           </p>
         </div>
       </footer>
