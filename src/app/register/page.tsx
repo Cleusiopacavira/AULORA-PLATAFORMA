@@ -1,25 +1,26 @@
-
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function RegisterPage() {
+  const router = useRouter();
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   async function handleRegister(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     setError("");
-    setMessage("");
+
+    const normalizedEmail = email.trim().toLowerCase();
 
     if (password !== confirmPassword) {
       setError("As palavras-passe não coincidem.");
@@ -41,39 +42,35 @@ export default function RegisterPage() {
     try {
       const supabase = createClient();
 
-      const { data, error } = await supabase.auth.signUp({
-        email: email.trim(),
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: normalizedEmail,
         password,
         options: {
           data: {
             full_name: fullName.trim(),
           },
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
-      if (error) throw error;
+      if (signUpError) {
+        throw signUpError;
+      }
 
       if (data.session) {
-        setMessage("Conta criada com sucesso! Bem-vindo à AULORA.");
+        router.replace("/dashboard");
       } else {
-        setMessage(
-          "Conta criada! Verifica o teu email para confirmares o registo."
+        router.replace(
+          `/verify-email?email=${encodeURIComponent(normalizedEmail)}`
         );
       }
 
-      setFullName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setAcceptedTerms(false);
+      router.refresh();
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : "Não foi possível criar a conta."
+          : "Não foi possível criar a conta. Tenta novamente."
       );
-    } finally {
       setLoading(false);
     }
   }
@@ -81,7 +78,6 @@ export default function RegisterPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#F5F7FA] px-5 py-12">
       <div className="w-full max-w-md rounded-3xl border border-slate-100 bg-white p-8 shadow-xl shadow-slate-200/50 sm:p-10">
-
         <Link href="/" className="text-3xl font-bold tracking-tight text-[#14243A]">
           AULORA<span className="text-[#087CC1]">.</span>
         </Link>
@@ -101,12 +97,12 @@ export default function RegisterPage() {
         </div>
 
         <form onSubmit={handleRegister} className="mt-8 space-y-5">
-
           <div>
-            <label className="mb-2 block text-sm font-semibold">
+            <label htmlFor="fullName" className="mb-2 block text-sm font-semibold">
               Nome completo
             </label>
             <input
+              id="fullName"
               type="text"
               required
               autoComplete="name"
@@ -118,10 +114,11 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-semibold">
+            <label htmlFor="email" className="mb-2 block text-sm font-semibold">
               Email
             </label>
             <input
+              id="email"
               type="email"
               required
               autoComplete="email"
@@ -133,10 +130,11 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-semibold">
+            <label htmlFor="password" className="mb-2 block text-sm font-semibold">
               Palavra-passe
             </label>
             <input
+              id="password"
               type="password"
               required
               minLength={8}
@@ -149,10 +147,11 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-semibold">
+            <label htmlFor="confirmPassword" className="mb-2 block text-sm font-semibold">
               Confirmar palavra-passe
             </label>
             <input
+              id="confirmPassword"
               type="password"
               required
               autoComplete="new-password"
@@ -181,12 +180,6 @@ export default function RegisterPage() {
             </p>
           )}
 
-          {message && (
-            <p role="status" className="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-700">
-              {message}
-            </p>
-          )}
-
           <button
             type="submit"
             disabled={loading}
@@ -194,7 +187,6 @@ export default function RegisterPage() {
           >
             {loading ? "A criar conta..." : "Criar conta gratuitamente →"}
           </button>
-
         </form>
 
         <p className="mt-8 text-center text-sm text-slate-500">
@@ -203,7 +195,6 @@ export default function RegisterPage() {
             Entrar
           </Link>
         </p>
-
       </div>
     </main>
   );
